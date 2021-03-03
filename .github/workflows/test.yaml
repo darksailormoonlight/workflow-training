@@ -8,7 +8,7 @@ on:
 
 jobs:
   unit-test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker
     steps:
@@ -28,7 +28,7 @@ jobs:
         path: ./coverage_outputs
 
   funtionnal-tests:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container:
       image: epitechcontent/epitest-docker
     steps:
