@@ -1,0 +1,45 @@
+name: Tests
+
+on:
+  push:
+    branches: [ dev, master ]
+  pull_request:
+    branches: [ dev, master ]
+
+jobs:
+  unit-test:
+    runs-on: ubuntu-20.04
+    container:
+      image: epitechcontent/epitest-docker
+    steps:
+    - uses: actions/checkout@v2
+    - name: make
+      if: true
+      run: make
+    - name: make-tests-run
+      if: true
+      run: make tests_run > coverage_outputs
+    - name: run-coverage
+      if: true
+      run: make coverage
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: ./coverage_outputs
+
+  funtionnal-tests:
+    runs-on: ubuntu-20.04
+    container:
+      image: epitechcontent/epitest-docker
+    steps:
+    - uses: actions/checkout@v2
+    - name: make
+      if: true
+      run: make
+    - name: run-functional-tests
+      if: true
+      run: ./functional-test.sh > function-tests_outputs
+    - uses: actions/upload-artifact@v2
+      with:
+        name: my-artifact
+        path: ./function-tests_outputs
